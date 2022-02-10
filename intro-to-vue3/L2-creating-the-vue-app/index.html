@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Creating the Vue App</title>
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+	<!-- this is the VIEW -->
+    <!-- Everything in this div has access to the Vue 'app'  -->
+    <div id="app">
+        <!-- Moustache syntax: Refers to the 'product' property in our data in main.js -->
+        <h1>{{ product }}</h1>
+
+        <!-- Moustache syntax: Refers to the 'description' property in our data in main.js -->
+        <p>{{ description }}</p>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Attribute Binding</title>
+    
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <div class="nav-bar"></div>
+
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <!-- v-bind: used to dynamically bind an attribute, 'src', to an expression, "image" -->
+                    <!-- v-bind directive creates a bond between the 'src' attribute & the data itself -->
+                    <!-- refers to the 'image' property in our 'data' in main.js -->
+                    
+                    <!-- image goes here -->
+                    <img v-bind:src="image">
+                    
+                    <!-- short hand way of writing the above code -->
+                    <!-- <img :src="image"> -->
+                </div>
+
+                <div class="product-info">
+                    <!-- Moustache syntax: Refers to the 'product' property in our data in main.js -->
+                    <h1>{{ product }}</h1>
+
+                    <!-- v-bind: used to dynamically bind an attribute, 'href', to an expression, "url" -->
+                    <!-- v-bind directive creates a bond between the 'href' attribute & the data itself -->
+                    <!-- refers to the 'url' property in our 'data' in main.js -->
+                    <a v-bind:href="url">Made by Vue Mastery</a>
+
+                    <!-- short hand way of writing the above code -->
+                    <!-- <a :href="url">Made by Vue Mastery</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

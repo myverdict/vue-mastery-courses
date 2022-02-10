@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Computed Properties</title>
+    
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <div class="nav-bar"></div>
+
+        <!-- Moustache syntax: Refers to the 'cart' property in our data in main.js -->
+        <div class="cart">Cart({{ cart }})</div>
+
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <!-- image is a computed property -->
+                    <img v-bind:src="image">
+                </div>
+
+                <div class="product-info">
+                    <!-- Moustache syntax: Refers to the 'product' & 'brand' properties in our data in main.js -->
+                    <!-- <h1>{{ brand + ' ' + product }}</h1> -->
+
+                    <!-- using computed properties to compute the product title -->
+                    <!-- computed properties are good for caching, it only updates when needed -->
+                    <h1>{{ title }}</h1>
+
+                    <!-- computed property when item is on sale -->
+                    <p>{{ sale }}</p>
+
+                    <!-- v-if by itself or paired with v-else -->
+                    <!-- inStock is a computed property -->
+                    <p v-if="inStock">In Stock</p>
+                    <p v-else>Out of Stock</p>
+                    
+                    <ul>
+                        <!-- v-for used on li el for looping over the 'details' array from data in main.js -->
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+
+                    <!-- update the image & inStock using computed properties -->
+                    <div class="color-circle" 
+                         v-for="(variant, index) in variants" 
+                         :key="variant.id"
+                         @mouseover="updateVariant(index)" 
+                         :style="{ backgroundColor: variant.color }"></div>
+                    
+                    <!-- inStock is a computed property -->
+                    <button class="button" 
+                            :class="{ disabledButton: !inStock }" 
+                            :disabled="!inStock"
+                            v-on:click="addToCart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

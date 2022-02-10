@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Event Handling</title>
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <div class="nav-bar"></div>
+
+        <!-- Moustache syntax: Refers to the 'cart' property in our data in main.js -->
+        <div class="cart">Cart({{ cart }})</div>
+
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <!-- v-bind: used to dynamically bind an attribute, 'src', to an expression, "image" -->
+                    <!-- v-bind directive creates a bond between the 'src' attribute & the data itself -->
+                    <!-- refers to the 'image' property in our 'data' in main.js -->
+                    <img v-bind:src="image">
+
+                    <!-- short hand way of writing the above code -->
+                    <!-- <img :src="image"> -->
+                </div>
+
+                <div class="product-info">
+                    <!-- Moustache syntax: Refers to the 'product' property in our data in main.js -->
+                    <h1>{{ product }}</h1>
+
+                    <!-- v-if by itself or paired with v-else -->
+                    <p v-if="inStock">In Stock</p>
+                    <p v-else>Out of Stock</p>
+                    
+                    <ul>
+                        <!-- v-for used on li el for looping over the 'details' array from data in main.js -->
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+                    
+                    <!-- v-on:mouseover or @mouseover is the vue version for hover -->
+                    <!-- when the user hovers over the item image, run the updateImage method() -->
+                    <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">{{ variant.color }}</div>
+                    
+                    <!-- a simple v-on:click is a click event listener which updates the cart data in the main.js -->
+                    <!-- <button class="button" v-on:click="cart += 1">Add to Cart</button> -->
+
+                    <!-- sometimes more complex actions need to be done -->
+                    <!-- an addToCart method is added as a value to the event listener -->
+                    <button class="button" v-on:click="addToCart">Add to Cart</button>
+
+                    <!-- short hand way of writing the above code -->
+                    <!-- <button class="button" @click="addToCart">Add to Cart</button> -->
+
+                    <button class="button" @click="removeFromCart">Remove from Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Class & Style Binding</title>
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <div class="nav-bar"></div>
+
+        <!-- Moustache syntax: Refers to the 'cart' property in our data in main.js -->
+        <div class="cart">Cart({{ cart }})</div>
+
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <!-- 
+                        when the item is not in stock a class is bound to create a new class named 
+                        'out-of-stock-img' for ./assets/style.css styles to be applied.
+                        NOTE: the kebab-cased format on the class name must be in single quotes.
+                    -->
+                    <img v-bind:class="{ 'out-of-stock-img': !inStock }" v-bind:src="image">
+                </div>
+
+                <div class="product-info">
+                    <!-- Moustache syntax: Refers to the 'product' property in our data in main.js -->
+                    <h1>{{ product }}</h1>
+
+                    <!-- v-if by itself or paired with v-else -->
+                    <p v-if="inStock">In Stock</p>
+                    <p v-else>Out of Stock</p>
+
+                    <ul>
+                        <!-- v-for used on li el for looping over the 'details' array from data in main.js -->
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+
+                    <!-- 
+                        added a class & v-bind:style object
+                        Note the backgroundColor property is camelCased in JS,
+                        whereas the css style property is background-color.
+                    -->
+                    <div v-for="variant in variants" 
+                         :key="variant.id" 
+                         @mouseover="updateImage(variant.image)"
+                         class="color-circle"
+                         :style="{ backgroundColor: variant.color}">
+                    </div>
+                    <!-- Another way to write the v-bind:style object using the kebab-cased -->
+                    <!-- Note the 'background-color' must be surrounded by single quotes -->
+                    <!-- <div v-bind:style="{'background-color': variant.color}" -->
+                    
+                    <!-- 
+                        when item is not in stock, the disabled feature is bound to the view (website) 
+                        to disable button clicks, and a class is bound to create a new class named disabledButton
+                        for ./assets/style.css styles to be applied.
+                    -->
+                    <button class="button" 
+                            @click="addToCart" 
+                            :disabled="!inStock"
+                            :class="{ disabledButton: !inStock }">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Forms & v-model</title>
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Everything in this div has access to the Vue 'app' -->
+    <div id="app">
+        <div class="nav-bar"></div>
+
+        <!-- Moustache syntax: Refers to the 'cart' property in our data in main.js -->
+        <div class="cart">Cart({{ cart.length }})</div>
+        
+        <!-- 
+            A component: 
+            - premium is a prop in the product-display component, 
+              (bound to the component) the value of which is a data in main.js 
+            - add-to-cart is an event listener that triggers the updateCart method 
+              (which is its' value); the updateCart method lives within main.js
+        -->
+        <product-display :premium="premium" 
+                         @add-to-cart="updateCart"></product-display>
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- Import Components -->
+    <script src="./components/ProductDisplay.js"></script>
+    <!-- The 2 components below are child components to ProductDisplay.js -->
+    <script src="./components/ReviewForm.js"></script>
+    <script src="./components/ReviewList.js"></script>
+
+    <!-- 
+        Mount App: To mount the app into our DOM, which effectively 
+        plugs our app into the #app div in the html above 
+    -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+
+</html>
