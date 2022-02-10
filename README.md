@@ -16,3 +16,5 @@
 </ul>
 
 <h2></h2>
+
+<a href="https://myverdict.github.io/vue-mastery-courses/index.html">Click here to view live!</a>  
